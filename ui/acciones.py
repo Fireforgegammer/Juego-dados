@@ -1,10 +1,9 @@
 from core.poker import jugar_poker
 from core.rol import jugar_rol
 
+
 def ejecutar_opcion(opcion):
     if opcion == "1":
-        # Simplemente llamamos a la función. 
-        # Ella ya se encarga de sus propios menús internos.
         jugar_poker()
         return True
 
@@ -13,9 +12,9 @@ def ejecutar_opcion(opcion):
         return True
 
     elif opcion == "3":
-        print("👋 Saliendo...")
+        print("Saliendo...")
         return False
-        
+
     else:
-        print("❌ Opción no válida")
+        print("Opcion no valida")
         return True
