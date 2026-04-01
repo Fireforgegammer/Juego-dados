@@ -1,23 +1,30 @@
-import sys
-import os
+import tkinter as tk
+from poker_gui import abrir_poker
 
-sys.stdout.reconfigure(encoding="utf-8")
+def abrir_dnd():
+    from tkinter import messagebox
+    messagebox.showinfo("D&D", "Aquí irá el submenú de D&D")
 
-# Añadir carpeta raíz al path para que Python encuentre ui/ y core/
-sys.path.append(os.path.dirname(os.path.abspath(__file__)))
+def mostrar_menu(root):
+    for widget in root.winfo_children():
+        widget.destroy()
 
-from ui.menu import mostrar_menu
-from ui.acciones import ejecutar_opcion
+    titulo = tk.Label(root, text="🎲 LANZADOR DE DADOS", font=("Arial", 16))
+    titulo.pack(pady=20)
 
+    btn_poker = tk.Button(root, text="Póker de Dados", width=20, command=lambda: abrir_poker(root))
+    btn_poker.pack(pady=5)
 
-def main():
-    while True:
-        mostrar_menu()
-        opcion = input("Elige una opción: ").strip()
-        continuar = ejecutar_opcion(opcion)
-        if not continuar:
-            break
+    btn_dnd = tk.Button(root, text="D&D", width=20, command=abrir_dnd)
+    btn_dnd.pack(pady=5)
 
+    btn_salir = tk.Button(root, text="Salir", width=20, command=root.quit)
+    btn_salir.pack(pady=5)
 
-if __name__ == "__main__":
-    main()
+root = tk.Tk()
+root.title("🎲 Lanzador de Dados")
+root.geometry("400x300")
+
+mostrar_menu(root)
+
+root.mainloop()
