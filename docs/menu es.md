@@ -2,6 +2,8 @@
 
 > Módulo de **interfaz visual**. Se encarga exclusivamente de mostrar el menú principal del programa en pantalla.
 
+🌐 [English version](menu_en.md) · [← Volver al índice](README.md)
+
 ---
 
 ## ¿Qué hace este archivo?
@@ -49,7 +51,6 @@ Ninguna. Este módulo es completamente autónomo y no importa nada.
                ▼
 ┌──────────────────────────────┐
 │  Imprime línea separadora    │
-│  ========================================  │
 └──────────────┬───────────────┘
                │
                ▼
@@ -76,6 +77,6 @@ Ninguna. Este módulo es completamente autónomo y no importa nada.
 
 ## Notas
 
-- Su diseño sigue el principio de **responsabilidad única**: solo hace una cosa (mostrar el menú) y no sabe nada del resto del programa.
+- Su diseño sigue el principio de **responsabilidad única**: solo hace una cosa (mostrar el menú).
 - Para añadir una nueva opción al menú, solo hay que agregar una línea `print()` aquí y registrar la lógica en `acciones.py`.
-- El menú se muestra cada vez que el bucle principal del programa lo llama, normalmente antes de pedir la opción al usuario.
+- El menú se muestra cada vez que el bucle principal lo llama, normalmente antes de pedir la opción al usuario.

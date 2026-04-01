@@ -2,6 +2,8 @@
 
 > Módulo **enrutador de opciones**. Conecta las opciones del menú principal con los módulos de juego correspondientes.
 
+🌐 [English version](acciones_en.md) · [← Volver al índice](README.md)
+
 ---
 
 ## ¿Qué hace este archivo?
@@ -30,12 +32,10 @@ Recibe la opción elegida por el usuario y lanza la acción correspondiente.
 
 | Opción | Acción | Devuelve |
 |--------|--------|----------|
-| `"1"`  | Llama a `jugar_poker()` — inicia el juego de Póker de Dados | `True` |
-| `"2"`  | Llama a `jugar_rol()` — inicia el modo D&D *(en desarrollo)* | `True` |
-| `"3"`  | Muestra mensaje de salida y cierra el programa | `False` |
+| `"1"`  | Llama a `jugar_poker()` | `True` |
+| `"2"`  | Llama a `jugar_rol()` *(en desarrollo)* | `True` |
+| `"3"`  | Muestra mensaje de salida y cierra | `False` |
 | Otro   | Muestra mensaje de error y vuelve al menú | `True` |
-
----
 
 **Ejemplo de uso:**
 ```python
@@ -63,7 +63,7 @@ continuar = ejecutar_opcion("3")  # Cierra el programa, devuelve False
      │            │            │             │
      ▼            ▼            ▼             ▼
   True          True         False         True
-  (continúa)  (continúa)  (cierra)     (continúa)
+(continúa)   (continúa)   (cierra)     (continúa)
 ```
 
 ---
@@ -72,13 +72,13 @@ continuar = ejecutar_opcion("3")  # Cierra el programa, devuelve False
 
 | Módulo | Uso |
 |--------|-----|
-| `core.poker` | Importa `jugar_poker()` para el modo póker |
-| `core.rol`   | Importa `jugar_rol()` para el modo D&D *(pendiente de implementar)* |
+| `core.poker` | Importa `jugar_poker()` |
+| `core.rol`   | Importa `jugar_rol()` *(pendiente)* |
 
 ---
 
 ## Notas
 
-- Este módulo **no gestiona el bucle principal** del programa; solo ejecuta una opción por llamada.
-- El control del bucle (seguir mostrando el menú o no) lo decide el valor devuelto (`True`/`False`).
-- Añadir nuevos modos de juego es tan sencillo como agregar un nuevo `elif` aquí e importar el módulo correspondiente.
+- Este módulo **no gestiona el bucle principal**: solo ejecuta una opción por llamada.
+- El control del bucle lo decide el valor devuelto (`True`/`False`).
+- Añadir nuevos modos de juego es tan sencillo como agregar un nuevo `elif` e importar el módulo correspondiente.

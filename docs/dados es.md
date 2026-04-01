@@ -2,6 +2,8 @@
 
 > Módulo base del simulador. Se encarga de **lanzar dados virtuales** de forma aleatoria.
 
+🌐 [English version](dados_en.md) · [← Volver al índice](README.md)
+
 ---
 
 ## ¿Qué hace este archivo?
@@ -102,5 +104,5 @@ resultados = tirar_varios_dados(3, 10)   # Tres dados de 10 caras → [7, 2, 9]
 ## Notas
 
 - Este módulo **no tiene lógica de juego**. Solo sabe tirar dados.
-- Es utilizado por `poker.py` para obtener los dados de cada turno.
+- Es utilizado por `poker.py` y `rol.py` para obtener los dados de cada turno.
 - El valor por defecto de `caras=6` lo hace listo para usar sin configuración adicional.

@@ -2,6 +2,8 @@
 
 > Módulo principal del juego **Póker de Dados**. Contiene toda la lógica: evaluación de jugadas, turnos del jugador, comportamiento de la IA y modos de juego.
 
+🌐 [English version](poker_en.md) · [← Volver al índice](README.md)
+
 ---
 
 ## ¿Qué hace este archivo?
@@ -11,8 +13,6 @@ Implementa el juego completo de póker con dados. Un jugador lanza 5 dados, pued
 ---
 
 ## Tabla de puntuaciones
-
-Las jugadas posibles, de menor a mayor valor:
 
 | Jugada       | Puntos | Descripción |
 |--------------|--------|-------------|
@@ -35,7 +35,7 @@ Las jugadas posibles, de menor a mayor valor:
 
 Cuenta cuántas veces aparece cada número en los dados.
 
-**Entrada:** lista de 5 enteros (los dados)  
+**Entrada:** lista de 5 enteros  
 **Devuelve:** diccionario `{valor: cantidad}`
 
 ```python
@@ -53,7 +53,6 @@ Comprueba si los dados forman una escalera (5 números consecutivos).
 
 ```python
 es_escalera([1, 2, 3, 4, 5])  →  True
-es_escalera([2, 3, 4, 5, 6])  →  True
 es_escalera([1, 1, 3, 4, 5])  →  False
 ```
 
@@ -88,10 +87,7 @@ Imprime los dados en pantalla con su posición numerada.
 Pide al usuario qué dados quiere relanzar y valida la entrada.
 
 **Devuelve:** lista de índices (base 0) de los dados a relanzar.  
-**Validaciones:**
-- Solo acepta números del 1 al 5
-- No permite repetidos
-- Devuelve lista vacía si el usuario no escribe nada
+**Validaciones:** solo acepta números del 1 al 5, sin repetidos. Devuelve lista vacía si el usuario no escribe nada.
 
 ---
 
@@ -99,8 +95,8 @@ Pide al usuario qué dados quiere relanzar y valida la entrada.
 
 Relanza únicamente los dados en las posiciones indicadas.
 
-**Entrada:** lista de dados actual + lista de posiciones a relanzar  
-**Devuelve:** nueva lista de dados con los seleccionados renovados
+**Entrada:** lista de dados actual + lista de posiciones  
+**Devuelve:** nueva lista con los dados seleccionados renovados
 
 ---
 
@@ -110,19 +106,19 @@ Relanza únicamente los dados en las posiciones indicadas.
 
 ### `ia_facil()`
 
-La IA **fácil** elige dados al azar para relanzar. No tiene estrategia.
+Elige dados al azar para relanzar. No tiene ninguna estrategia.
 
 ---
 
 ### `ia_media(dados)`
 
-La IA **media** conserva los dados que ya forman parejas o mejores combinaciones, y relanza el resto.
+Conserva los dados que ya forman parejas o mejores combinaciones, relanza el resto.
 
 ---
 
 ### `ia_inteligente(dados)`
 
-La IA **inteligente** busca el valor que más se repite y conserva todos los dados con ese valor, relanzando el resto. Es la estrategia óptima para maximizar el resultado.
+Busca el valor que más se repite y conserva todos los dados con ese valor. Es la estrategia óptima.
 
 ---
 
@@ -132,11 +128,7 @@ La IA **inteligente** busca el valor que más se repite y conserva todos los dad
 
 ### `jugar_turno(nombre="Jugador")`
 
-Gestiona el turno completo de un jugador humano:
-1. Lanza 5 dados
-2. Muestra los dados
-3. Pregunta si quiere relanzar (hasta 2 veces)
-4. Evalúa y muestra la jugada final
+Gestiona el turno completo de un jugador humano: lanza, muestra, permite relanzar (hasta 2 veces), evalúa.
 
 **Devuelve:** puntuación obtenida (entero)
 
@@ -144,39 +136,33 @@ Gestiona el turno completo de un jugador humano:
 
 ### `turno_ia(nivel)`
 
-Gestiona el turno de la IA según su nivel (`"facil"`, `"medio"`, `"inteligente"`):
-1. Lanza 5 dados
-2. Decide qué relanzar según su nivel
-3. Repite hasta 2 veces
-4. Muestra el resultado
+Gestiona el turno de la IA según su nivel (`"facil"`, `"medio"`, `"inteligente"`).
 
 **Devuelve:** puntuación obtenida (entero)
 
 ---
 
-## Modos de juego
-
----
-
 ### `modo_vs_ia()`
 
-Pide el nivel de dificultad, ejecuta el turno del jugador y el de la IA, y compara puntuaciones para determinar el ganador.
+Ejecuta una partida completa contra la IA: pide nivel, ejecuta ambos turnos, compara y anuncia ganador.
 
 ---
 
 ### `modo_vs_jugador()`
 
-Ejecuta el turno del Jugador 1 y el del Jugador 2, y determina el ganador por puntuación.
+Ejecuta una partida entre dos jugadores humanos y determina el ganador.
 
 ---
 
 ### `jugar_poker()`
 
-Punto de entrada del juego. Muestra el menú inicial con los dos modos disponibles y llama a la función correspondiente.
+Punto de entrada del juego. Muestra el menú de modos y llama a la función correspondiente.
 
 ---
 
-## Diagrama de flujo general
+## Diagramas de flujo
+
+### Flujo general del juego
 
 ```
 ┌──────────────────────────────┐
@@ -203,22 +189,19 @@ Punto de entrada del juego. Muestra el menú inicial con los dos modos disponibl
                ▼
 ┌──────────────────────────────┐
 │   tirar_varios_dados(5, 6)   │
-│   Lanza 5 dados              │
 └──────────────┬───────────────┘
                │
                ▼
 ┌──────────────────────────────┐
 │       mostrar_dados()        │
-│  1:[3] 2:[1] 3:[6] 4:[4] 5:[2] │
 └──────────────┬───────────────┘
                │
        ┌───────┴────────┐
-    ¿Relanzar?     intentos > 0
+    ¿Relanzar?      intentos=0
        │ SÍ            │ NO
        ▼               │
 ┌─────────────┐        │
 │leer_indices()│       │
-│¿Qué dados?  │        │
 └──────┬──────┘        │
        ▼               │
 ┌──────────────┐       │
@@ -238,7 +221,7 @@ Punto de entrada del juego. Muestra el menú inicial con los dos modos disponibl
 └──────────────────────────────┘
 ```
 
-### Diagrama: turno de la IA
+### Flujo del turno de la IA
 
 ```
 ┌──────────────────────────────┐
@@ -258,7 +241,7 @@ Punto de entrada del juego. Muestra el menú inicial con los dos modos disponibl
 │ia_facil()│ │ia_media()│ │ia_inteligente│
 │Azar total│ │Guarda    │ │Maximiza el   │
 │          │ │parejas   │ │valor más     │
-│          │ │o mejor   │ │repetido      │
+│          │ │          │ │repetido      │
 └─────┬────┘ └────┬─────┘ └──────┬───────┘
       └───────────┴──────────────┘
                   │
@@ -274,7 +257,7 @@ Punto de entrada del juego. Muestra el menú inicial con los dos modos disponibl
       └───────────────────────┘
 ```
 
-### Diagrama: evaluación de jugada
+### Flujo de evaluación de jugada
 
 ```
 evaluar_jugada(dados)
