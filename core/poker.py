@@ -1,30 +1,48 @@
-import random
-
 def evaluar_jugada(dados):
-    conteos = {x: dados.count(x) for x in set(dados)}
-    valores = sorted(conteos.values(), reverse=True)
-    
-    if 5 in valores: return "Repóker", 80
-    if 4 in valores: return "Póker", 70
-    if 3 in valores and 2 in valores: return "Full House", 60
-    if sorted(dados) in [[1,2,3,4,5], [2,3,4,5,6]]: return "Escalera", 50
-    if 3 in valores: return "Trio", 40
-    if valores.count(2) == 2: return "Doble pareja", 30
-    if 2 in valores: return "Pareja", 20
-    return "Carta Alta", 10
+    valores = sorted(dados, reverse=True)
+    conteo = {x: valores.count(x) for x in set(valores)}
+    frecuencias = sorted(conteo.values(), reverse=True)
+    orden_v = sorted(conteo.items(), key=lambda x: (x[1], x[0]), reverse=True)
+    v_score = [x[0] for x in orden_v]
 
-def ia_facil(dados=None):
-    return random.sample(range(5), random.randint(1, 3))
+    if frecuencias == [5]:
+        return "Repóker", 800 + v_score[0]
+    if frecuencias == [4, 1]:
+        return "Póker", 700 + v_score[0]
+    if frecuencias == [3, 2]:
+        return "Full House", 600 + (v_score[0] * 10) + v_score[1]
+    
+    es_escalera = all(valores[i] - valores[i+1] == 1 for i in range(len(valores)-1))
+    if es_escalera:
+        return "Escalera", 500 + valores[0]
+    
+    if frecuencias == [3, 1, 1]:
+        return "Trio", 400 + v_score[0]
+    if frecuencias == [2, 2, 1]:
+        return "Doble Pareja", 300 + (v_score[0] * 10) + (v_score[1])
+    if frecuencias == [2, 1, 1, 1]:
+        return "Pareja", 200 + v_score[0]
+    
+    return "Carta Alta", 100 + valores[0]
+
+def ia_facil(dados):
+    return [i for i, _ in enumerate(dados)]
 
 def ia_media(dados):
-    conteos = {x: dados.count(x) for x in set(dados)}
-    mantener = [i for i, d in enumerate(dados) if conteos[d] >= 2]
-    return [i for i in range(5) if i not in mantener]
+    conteo = {x: dados.count(x) for x in set(dados)}
+    max_frec = max(conteo.values())
+    if max_frec >= 2:
+        valor_mantener = [v for v, c in conteo.items() if c == max_frec][0]
+        return [i for i, v in enumerate(dados) if v != valor_mantener]
+    return [i for i, _ in enumerate(dados)]
 
 def ia_inteligente(dados):
-    jugada, pts = evaluar_jugada(dados)
-    if pts >= 60: return []
-    conteos = {x: dados.count(x) for x in set(dados)}
-    max_repetido = max(conteos.values())
-    valor_fuerte = [v for v, c in conteos.items() if c == max_repetido][0]
-    return [i for i, d in enumerate(dados) if d != valor_fuerte]
+    conteo = {x: dados.count(x) for x in set(dados)}
+    valor_mantener = max(conteo, key=conteo.get)
+    if conteo[valor_mantener] > 1:
+        return [i for i, v in enumerate(dados) if v != valor_mantener]
+    
+    if all(x in dados for x in [2,3,4,5]) or all(x in dados for x in [1,2,3,4]) or all(x in dados for x in [3,4,5,6]):
+        return [i for i, v in enumerate(dados) if v not in [1,2,3,4,5,6]]
+        
+    return [i for i, v in enumerate(dados) if v < 4]

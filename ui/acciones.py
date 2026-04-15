@@ -1,20 +1,8 @@
-from core.poker import jugar_poker
-from core.rol import jugar_rol
-
+from core.poker import evaluar_jugada, ia_inteligente, ia_media, ia_facil
+from rol.rol import calcular_lanzamiento_completo
 
 def ejecutar_opcion(opcion):
-    if opcion == "1":
-        jugar_poker()
-        return True
-
-    elif opcion == "2":
-        jugar_rol()
-        return True
-
-    elif opcion == "3":
-        print("Saliendo...")
-        return False
-
-    else:
-        print("Opcion no valida")
-        return True
+    if opcion == "1": return True
+    elif opcion == "2": return True
+    elif opcion == "3": return False
+    return True

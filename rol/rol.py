@@ -8,7 +8,6 @@ def obtener_resumen_cesta(cesta):
 def calcular_lanzamiento_completo(cesta):
     resultados_detallados = {}
     total_general = 0
-    
     for caras, cantidad in cesta.items():
         caras_int = int(caras)
         resultados, subtotal = tirar_rol(cantidad, caras_int)
@@ -17,5 +16,4 @@ def calcular_lanzamiento_completo(cesta):
             "subtotal": subtotal
         }
         total_general += subtotal
-        
     return resultados_detallados, total_general
