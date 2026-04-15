@@ -5,8 +5,8 @@ from core.dados import tirar_rol
 
 IMAGENES_ORIGINALES = {}
 COLORES_DADOS = {
-    4: "#e74c3c", 6: "#3498db", 8: "#2ecc71",
-    10: "#f1c40f", 12: "#9b59b6", 20: "#e67e22", 100: "#1abc9c"
+    4: "#b3ca07", 6: "#52ca07", 8: "#1e07ca",
+    10: "#d31717", 12: "#700ee1", 20: "#e67e22", 100: "#1abc9c"
 }
 
 def cargar_assets_rol():

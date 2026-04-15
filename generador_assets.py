@@ -29,16 +29,26 @@ def generar_dados_rol(ruta_destino="ui/assets"):
     if not os.path.exists(ruta_destino):
         os.makedirs(ruta_destino)
     size = 512
+    c = size // 2
+    m = size // 10
+    
     config_rol = [
-        (4, "#e74c3c"), (6, "#3498db"), (8, "#2ecc71"),
-        (10, "#f1c40f"), (12, "#9b59b6"), (20, "#e67e22"), (100, "#1abc9c")
+        (4, "#b3ca07", [(c, m), (size-m, size-m), (m, size-m)]),
+        (6, "#52ca07", [(m, m), (size-m, m), (size-m, size-m), (m, size-m)]),
+        (8, "#1e07ca", [(c, m), (size-m, c), (c, size-m), (m, c)]),
+        (10, "#d31717", [(c, m), (size-m*1.5, c), (c, size-m), (m*1.5, c)]),
+        (12, "#700ee1", [(c, m), (size-m, size//2.5), (size-size//3.5, size-m), (size//3.5, size-m), (m, size//2.5)]),
+        (20, "#e67e22", [(c, m), (size-m, size//4), (size-m, 3*size//4), (c, size-m), (m, 3*size//4), (m, size//4)]),
+        (100, "#1abc9c", "circle")
     ]
-    for caras, color in config_rol:
+
+    for caras, color, puntos in config_rol:
         img = Image.new('RGBA', (size, size), (0, 0, 0, 0))
         draw = ImageDraw.Draw(img)
-        pad = size // 8
-        rect = [pad, pad, size - pad, size - pad]
-        draw.rounded_rectangle(rect, radius=size//4, fill=color, outline="black", width=12)
+        if puntos == "circle":
+            draw.ellipse([m, m, size-m, size-m], fill=color, outline="black", width=12)
+        else:
+            draw.polygon(puntos, fill=color, outline="black", width=12)
         nombre_final = os.path.join(ruta_destino, f"rol_d{caras}.png")
         img.save(nombre_final)
 
