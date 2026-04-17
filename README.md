@@ -121,7 +121,7 @@ LANZADOR DE DADOS
 
 | Módulo | Función Principal | Documentación |
 |--------|-------------------|---|
-| **menu.py** | Menús del sistema | [📄 menu_es.md](docs/menu_es.md) |
+| **menu.py** | Menús del sistema | [📄 menu_es.md](docs/menu%es.md) |
 | **acciones.py** | Enrutador de opciones | [📄 acciones_es.md](docs/acciones_es.md) |
 
 ---
